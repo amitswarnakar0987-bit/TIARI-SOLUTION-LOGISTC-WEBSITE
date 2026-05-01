@@ -29,6 +29,9 @@ export default function Hero() {
     }
   };
 
+  // Mobile optimization for ambient glow
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
@@ -71,21 +74,23 @@ export default function Hero() {
           className="w-full h-full object-cover"
           loading="eager"
           fetchPriority="high"
+          width="1920"
+          height="1080"
         />
-        {/* Dark cinematic overlays - increased darkness for premium feel and readability */}
+        {/* Dark cinematic overlays */}
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-charcoal/20" />
         <div className="absolute inset-0 bg-charcoal/30" />
       </motion.div>
 
-      {/* Ambient Glow */}
+      {/* Ambient Glow - Optimized for mobile */}
       <motion.div
-        animate={{ 
+        animate={isMobile ? { opacity: [0.1, 0.15, 0.1] } : { 
           opacity: [0.1, 0.2, 0.1],
           x: [0, 30, 0],
           y: [0, -20, 0]
         }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-orange/15 rounded-full blur-[100px] pointer-events-none z-0"
+        transition={{ duration: isMobile ? 5 : 10, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/4 left-1/4 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-orange/15 rounded-full blur-[80px] sm:blur-[100px] pointer-events-none z-0"
       />
 
       {/* Content */}

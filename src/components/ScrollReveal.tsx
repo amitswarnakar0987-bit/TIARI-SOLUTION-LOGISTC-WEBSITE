@@ -20,6 +20,7 @@ export default function ScrollReveal({ children, delay = 0, direction = 'up', cl
   };
 
   const offset = directionMap[direction];
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   return (
     <motion.div
@@ -28,7 +29,7 @@ export default function ScrollReveal({ children, delay = 0, direction = 'up', cl
         y: shouldReduceMotion ? 0 : offset.y, 
         x: shouldReduceMotion ? 0 : offset.x,
         scale: shouldReduceMotion ? 1 : 0.98,
-        filter: shouldReduceMotion ? 'blur(0px)' : 'blur(4px)'
+        filter: (shouldReduceMotion || isMobile) ? 'blur(0px)' : 'blur(4px)'
       }}
       whileInView={{ 
         opacity: 1, 

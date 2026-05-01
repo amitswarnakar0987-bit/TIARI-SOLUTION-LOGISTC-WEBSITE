@@ -60,6 +60,8 @@ export default function GlobalNetwork() {
                   src="/images/global-network.jpg"
                   alt="World map highlighting logistics routes"
                   loading="lazy"
+                  width="1200"
+                  height="900"
                   className="absolute inset-0 w-full h-full object-cover opacity-30"
                 />
                 <div className="absolute inset-0 bg-charcoal/70" />

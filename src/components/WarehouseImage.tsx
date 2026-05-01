@@ -24,6 +24,8 @@ export default function WarehouseImage() {
               alt="Interior of a modern, well-organized high-tech logistics warehouse"
               className="w-full h-[120%] object-cover absolute top-[-10%]"
               loading="lazy"
+              width="1920"
+              height="1080"
             />
             
             {/* Cinematic overlays */}

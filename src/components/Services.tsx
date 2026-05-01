@@ -73,6 +73,8 @@ export default function Services() {
                     src={service.image}
                     alt={service.title}
                     loading="lazy"
+                    width="800"
+                    height="600"
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent" />
