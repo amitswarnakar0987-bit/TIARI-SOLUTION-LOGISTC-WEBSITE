@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FAF8F5;
+  --color-cream-dark: #F0EDE8;
+  --color-charcoal: #1A1A1A;
+  --color-charcoal-light: #2D2D2D;
+  --color-orange: #D4622B;
+  --color-orange-dark: #B8501F;
+  --color-orange-light: #E8854D;
+  --color-soft-gray: #E5E5E5;
+  --color-medium-gray: #9A9A9A;
+  --color-dark-overlay: rgba(10, 10, 10, 0.65);
+  --font-heading: 'Urbanist', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scroll margin for anchor nav (accounts for fixed navbar) */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+::selection {
+  background-color: #D4622B;
+  color: white;
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-medium-gray);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-charcoal);
+}
+
+/* Logo strip animation */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 30s linear infinite;
+  will-change: transform;
+}
+
+/* Parallax helper */
+.parallax-slow {
+  will-change: transform;
+}
+
+/* Counter animation */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-count-up {
+  animation: count-up 0.6s ease-out forwards;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #D4622B, #E8854D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle noise texture overlay */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-scroll-left {
+    animation: none;
+  }
+}
+
+/* Form input global styles */
+input, textarea, select {
+  font-family: var(--font-body);
+}
+
+input::placeholder, textarea::placeholder {
+  font-family: var(--font-body);
+}
+
+/* Premium Button Utility */
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transform: translateY(0);
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+}
+
+.btn-premium:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-premium::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-premium:hover::after {
+  opacity: 0.1;
+}
+
+/* Footer Reveal Helper */
+.main-content-wrapper {
+  position: relative;
+  z-index: 10;
+  background-color: var(--color-cream);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  margin-bottom: var(--footer-height, 0);
+}
+
+.footer-reveal-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Responsive Hide for Mobile (Simplified Reveal) */
+@media (max-width: 768px) {
+  .main-content-wrapper {
+    margin-bottom: 0 !important;
+    box-shadow: none;
+  }
+  .footer-reveal-container {
+    position: relative;
+  }
+}
+/* Navigation Link Hover Effect */
+.nav-link-hover {
+  position: relative;
+}
+
+.nav-link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #D4622B;
+  transition: width 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.nav-link-hover:hover::after,
+.nav-link-hover.active::after {
+  width: 100%;
+}
